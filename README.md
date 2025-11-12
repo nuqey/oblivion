@@ -1,3 +1,5 @@
+<img width="1593" height="1076" alt="image" src="https://github.com/user-attachments/assets/a1ad3c7e-eb2f-4fc0-b789-a69fafed8db1" />
+
 # 🌑 Oblivion — Dark Minimal Productivity Dashboard
 
 **Oblivion** is a calm, dark, minimal personal dashboard designed for focus and ambience.  
