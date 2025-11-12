@@ -65,5 +65,3 @@ This project is open-source and free to use.
 ---
 
 Made with silence, focus, and calm design by **Nuqxo**
-
-```
