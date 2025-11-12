@@ -45,7 +45,7 @@ git clone https://github.com/nuqxo/oblivion.git
 ```
 oblivion/
 │── index.html
-└── assets/   (optional for sounds, icons, backgrounds)
+└── assets/   (optional for sounds)
 ```
 
 ---
