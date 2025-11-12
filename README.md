@@ -43,7 +43,7 @@ git clone https://github.com/nuqxo/oblivion-dashboard.git
 ## 📁 File Structure
 
 ```
-oblivion-dashboard/
+oblivion/
 │── index.html
 └── assets/   (optional for sounds, icons, backgrounds)
 ```
@@ -64,6 +64,6 @@ This project is open-source and free to use.
 
 ---
 
-Made with silence, focus, and calm design by **nuqxo**
+Made with silence, focus, and calm design by **Nuqxo**
 
 ```
