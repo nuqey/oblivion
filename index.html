@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Oblivion — Dark Dashboard</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+<style>
+  /* ===== base & fonts ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+  :root{
+    --bg:#070707;
+    --panel:#0f0f10;
+    --muted:#9aa0a6;
+    --accent:#ff0055;
+    --accent2:#00eaff;
+    --glass-bg: rgba(255,255,255,0.04);
+  }
+  /* cyber theme variables (toggle with .theme-cyber on body) */
+  .theme-cyber { --accent: #ff00aa; --accent2:#00ffec; --panel:#06010a; --bg:#050007; }
+  .theme-glass { --panel: rgba(255,255,255,0.03); --bg: linear-gradient(180deg,#05060a,#07060a); --accent:#ff7ab6; }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e9eef6}
+  .wrap{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns: 420px 1fr;
+    gap:28px;
+    padding:36px;
+    align-items:start;
+  }
+
+  /* left panel */
+  .panel{
+    background:var(--panel);
+    border-radius:14px;
+    padding:20px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    position:relative;
+    overflow:hidden;
+  }
+  .title{
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:2px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .subtitle{color:var(--muted); font-size:12px; margin-top:6px}
+
+  /* clock */
+  .clock{
+    margin-top:18px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:flex-start;
+  }
+  .clock .time{ font-size:44px; font-weight:600; letter-spacing:1px;}
+  .clock .date{ color:var(--muted); font-size:13px; }
+
+  /* weather */
+  .weather{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .w-icon{
+    width:68px;height:68px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+  }
+  .w-info{ display:flex;flex-direction:column; gap:2px;}
+  .w-temp{ font-size:20px; font-weight:600;}
+  .w-desc{ color:var(--muted); font-size:13px }
+
+  /* quotes */
+  .quote{
+    margin-top:18px;
+    padding:12px;
+    border-radius:10px;
+    background:var(--glass-bg);
+    font-style:italic;color:#dfe7ef;
+    min-height:60px;
+  }
+  .quote small{display:block;color:var(--muted);margin-top:8px;font-style:normal}
+
+  /* music */
+  .music{
+    margin-top:16px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .mus-controls{display:flex;gap:10px;align-items:center}
+  .btn{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); color:#fff; padding:8px 12px;border-radius:10px; cursor:pointer}
+  .play{display:flex;align-items:center;gap:8px;font-weight:600}
+
+  /* pomodoro */
+  .pom{
+    margin-top:18px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .pom-display{ font-size:28px;font-weight:700;}
+  .pom-controls{display:flex;gap:8px}
+
+  /* notes */
+  .notes{
+    margin-top:18px;
+  }
+  textarea{width:100%;min-height:120px;background:transparent;border:1px dashed rgba(255,255,255,0.04);color:#eaf4ff;padding:12px;border-radius:8px;resize:vertical}
+
+  /* right area - big */
+  .main{
+    display:flex;flex-direction:column;gap:20px;
+  }
+  .bigcard{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;padding:24px; min-height:320px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .mood-row{display:flex;gap:12px;align-items:center}
+  .mood-btn{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+  /* theme / footer */
+  .row{display:flex;gap:8px;align-items:center}
+  .small{font-size:12px;color:var(--muted)}
+
+  /* responsive */
+  @media (max-width:960px){
+    .wrap{grid-template-columns:1fr; padding:18px}
+    .clock .time{font-size:36px}
+  }
+</style>
+</head>
+<body class="theme-dark">
+
+<div class="wrap">
+  <!-- LEFT PANEL -->
+  <aside class="panel">
+    <div class="title">
+      <div>OBLIVION</div>
+      <div class="small">I built my calm space</div>
+    </div>
+    <div class="subtitle">A dark minimal dashboard — clock, weather, quotes & ambient</div>
+
+    <!-- CLOCK -->
+    <div class="clock" aria-live="polite">
+      <div class="time" id="time">--:--</div>
+      <div class="date" id="date">Loading date...</div>
+    </div>
+
+    <!-- WEATHER -->
+    <div class="weather" id="weather">
+      <div class="w-icon" id="wIcon">--</div>
+      <div class="w-info">
+        <div class="w-temp" id="wTemp">--°C</div>
+        <div class="w-desc" id="wDesc">Searching location…</div>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote" id="quote">"Loading thought…" <small id="quoteAuthor"></small></div>
+
+    <!-- MUSIC -->
+    <div class="music">
+      <div class="row">
+        <button class="btn play" id="playBtn">▶ Play Ambient</button>
+        <div class="small">Volume</div>
+        <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" />
+      </div>
+      <div class="small">Tip: add your ambient mp3 — file path in player.src</div>
+    </div>
+
+    <!-- POMODORO -->
+    <div class="pom">
+      <div class="small">Focus mode</div>
+      <div class="pom-display" id="pomTimer">25:00</div>
+      <div class="pom-controls">
+        <button class="btn" id="pomStart">Start</button>
+        <button class="btn" id="pomPause">Pause</button>
+        <button class="btn" id="pomReset">Reset</button>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="small">Notes</div>
+      <textarea id="notes" placeholder="Quick notes..."></textarea>
+    </div>
+
+    <!-- footer -->
+    <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
+      <div class="small">© nuqxo</div>
+      <div class="row">
+        <button class="btn" id="themeDark">Dark</button>
+        <button class="btn" id="themeGlass">Glass</button>
+        <button class="btn" id="themeCyber">Cyber</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT / MAIN -->
+  <main class="main">
+    <div class="bigcard" id="ambientCard">
+      <h3 style="margin:0 0 8px 0">Ambient Player & Visual</h3>
+      <div style="color:var(--muted);margin-bottom:12px">Visualizer, wave & track info</div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="flex:1">
+          <div id="trackTitle" style="font-weight:700">No track loaded</div>
+          <div style="color:var(--muted);font-size:13px" id="trackArtist">—</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="audioFile" type="file" accept="audio/*" />
+        </div>
+      </div>
+
+      <div id="visual" style="margin-top:24px;height:160px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));display:flex;align-items:center;justify-content:center;color:var(--muted)">
+        Visualizer (use audio file to see basic waveform)
+      </div>
+    </div>
+
+    <div class="bigcard">
+      <h3 style="margin:0 0 12px 0">Mood & Phrases</h3>
+      <div style="color:var(--muted);margin-bottom:12px">Pick a mood to change ambience</div>
+
+      <div class="mood-row">
+        <button class="mood-btn" data-mood="calm">😌 Calm</button>
+        <button class="mood-btn" data-mood="focus">🎧 Focus</button>
+        <button class="mood-btn" data-mood="night">🌙 Night</button>
+        <button class="mood-btn" data-mood="storm">⛈ Storm</button>
+      </div>
+
+      <div style="margin-top:16px;color:var(--muted);font-size:13px">
+        Saved phrases:
+      </div>
+      <ul id="phraseList" style="margin-top:8px;color:#dfe7ef"></ul>
+    </div>
+  </main>
+</div>
+
+<!-- AUDIO element (hidden) -->
+<audio id="audio" crossorigin="anonymous"></audio>
+
+<script>
+/* ===== Clock ===== */
+const timeEl = document.getElementById('time');
+const dateEl = document.getElementById('date');
+function pad(n){return n.toString().padStart(2,'0')}
+function updateClock(){
+  const d = new Date();
+  timeEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes());
+  dateEl.textContent = d.toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric'});
+}
+setInterval(updateClock,1000); updateClock();
+
+/* ===== Quotes ===== */
+const quotes = [
+  {t:"You don't need to be loud to be powerful.", a:"— nuqxo"},
+  {t:"Silence is not empty, it's full of answers.", a:"— unknown"},
+  {t:"I built my own calm space on the web.", a:"— Oblivion"},
+  {t:"Small things keep the mind steady.", a:"— anonymous"}
+];
+let qIndex = 0;
+const quoteEl = document.getElementById('quote');
+const quoteA = document.getElementById('quoteAuthor');
+function showQuote(i){
+  quoteEl.textContent = `"${quotes[i].t}"`;
+  quoteA.textContent = quotes[i].a;
+}
+setInterval(()=>{ qIndex=(qIndex+1)%quotes.length; showQuote(qIndex); },8000);
+showQuote(0);
+
+/* ===== Weather (Open-Meteo) =====
+ - No API key required.
+ - We try geolocation; if blocked, user can type coords (not implemented here).
+*/
+const wIcon = document.getElementById('wIcon');
+const wTemp = document.getElementById('wTemp');
+const wDesc = document.getElementById('wDesc');
+
+function weatherIcon(code, temp){
+  // very simple mapping
+  if(code === 0) return '☀'; // clear
+  if(code <= 3) return '⛅';
+  if(code <= 48) return '🌫';
+  if(code <= 77) return '❄';
+  if(code <= 99) return '🌧';
+  return '☁';
+}
+
+function fetchWeather(lat, lon){
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+  fetch(url).then(r=>r.json()).then(data=>{
+    if(!data || !data.current_weather) {
+      wTemp.textContent = '--°C'; wDesc.textContent = 'Weather unavailable'; return;
+    }
+    const cw = data.current_weather;
+    const tempC = Math.round(cw.temperature);
+    wIcon.textContent = weatherIcon(cw.weathercode,tempC);
+    wTemp.textContent = `${tempC}°C`;
+    wDesc.textContent = `Wind ${Math.round(cw.windspeed)} km/h`;
+  }).catch(e=>{
+    wTemp.textContent='--°C'; wDesc.textContent='Weather error';
+  });
+}
+
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    fetchWeather(pos.coords.latitude, pos.coords.longitude);
+  },err=>{
+    // fallback: show placeholder / you could ask user for city coords
+    wTemp.textContent='--°C';
+    wDesc.textContent='Location blocked';
+  },{timeout:8000});
+} else {
+  wTemp.textContent='--°C'; wDesc.textContent='No geolocation';
+}
+
+/* ===== Music player ===== */
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('playBtn');
+const vol = document.getElementById('vol');
+const audioFile = document.getElementById('audioFile');
+const trackTitle = document.getElementById('trackTitle');
+const trackArtist = document.getElementById('trackArtist');
+
+audio.volume = Number(vol.value);
+vol.addEventListener('input', e=> audio.volume = Number(e.target.value));
+
+let playing=false;
+playBtn.addEventListener('click', ()=>{
+  if(!audio.src){ alert('Select an ambient audio file (mp3) using the file input'); return; }
+  if(!playing){ audio.play(); playBtn.textContent='⏸ Pause Ambient'; playing=true; }
+  else { audio.pause(); playBtn.textContent='▶ Play Ambient'; playing=false; }
+});
+audio.addEventListener('pause',()=> { playing=false; playBtn.textContent='▶ Play Ambient'; });
+audio.addEventListener('play',()=> { playing=true; playBtn.textContent='⏸ Pause Ambient'; });
+
+audioFile.addEventListener('change', (ev)=>{
+  const f = ev.target.files[0];
+  if(!f) return;
+  const url = URL.createObjectURL(f);
+  audio.src = url;
+  trackTitle.textContent = f.name;
+  trackArtist.textContent = 'Local file';
+  audio.play();
+});
+
+/* ===== Simple visual (fake waveform) ===== */
+const visual = document.getElementById('visual');
+function showFakeBars(){
+  visual.innerHTML = '';
+  const count = 36;
+  for(let i=0;i<count;i++){
+    const bar = document.createElement('div');
+    bar.style.width = '2%';
+    bar.style.height = `${20 + Math.random()*120}px`;
+    bar.style.display='inline-block';
+    bar.style.margin='0 1%';
+    bar.style.background = `linear-gradient(180deg, ${getComputedStyle(document.body).getPropertyValue('--accent2')}, ${getComputedStyle(document.body).getPropertyValue('--accent')})`;
+    bar.style.opacity = '0.85';
+    bar.style.borderRadius='3px';
+    visual.appendChild(bar);
+  }
+}
+setInterval(showFakeBars, 600);
+showFakeBars();
+
+/* ===== Pomodoro ===== */
+let pomTotal = 25*60;
+let pomTimer = pomTotal;
+let pomInterval = null;
+const pomDisplay = document.getElementById('pomTimer');
+const startBtn = document.getElementById('pomStart');
+const pauseBtn = document.getElementById('pomPause');
+const resetBtn = document.getElementById('pomReset');
+
+function formatTime(s){ return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); }
+function updatePom(){ pomDisplay.textContent = formatTime(pomTimer); }
+
+startBtn.addEventListener('click', ()=>{
+  if(pomInterval) return;
+  pomInterval = setInterval(()=>{
+    if(pomTimer>0){ pomTimer--; updatePom(); }
+    else { clearInterval(pomInterval); pomInterval=null; alert('Pomodoro finished'); }
+  },1000);
+});
+pauseBtn.addEventListener('click', ()=>{ if(pomInterval){ clearInterval(pomInterval); pomInterval=null; } });
+resetBtn.addEventListener('click', ()=>{ if(pomInterval){ clearInterval(pomInterval); pomInterval=null; } pomTimer = pomTotal; updatePom(); });
+
+updatePom();
+
+/* ===== Notes (localStorage) ===== */
+const notesEl = document.getElementById('notes');
+const NOTES_KEY = 'oblivion_notes_v1';
+notesEl.value = localStorage.getItem(NOTES_KEY) || '';
+notesEl.addEventListener('input', ()=>{ localStorage.setItem(NOTES_KEY, notesEl.value); });
+
+/* ===== Moods & phrases ===== */
+const phraseList = document.getElementById('phraseList');
+const moodButtons = document.querySelectorAll('.mood-btn');
+const PKEY = 'oblivion_phrases';
+let phrases = JSON.parse(localStorage.getItem(PKEY) || '["Stay soft. Think harder.","Breathe. Focus. Do one thing."]');
+
+function renderPhrases(){
+  phraseList.innerHTML='';
+  phrases.forEach(p=>{
+    const li = document.createElement('li'); li.textContent = p;
+    phraseList.appendChild(li);
+  });
+}
+renderPhrases();
+
+moodButtons.forEach(b=>{
+  b.addEventListener('click', ()=>{
+    const mood = b.dataset.mood;
+    if(mood==='calm'){ document.body.className='theme-dark'; quotes.unshift({t:"Softness is strength.", a:"— Oblivion"}); }
+    if(mood==='focus'){ document.body.className='theme-glass'; quotes.unshift({t:"One task. One mind.", a:"— Oblivion"}); }
+    if(mood==='night'){ document.body.className='theme-dark'; quotes.unshift({t:"Night clears the noise.", a:"— Oblivion"}); }
+    if(mood==='storm'){ document.body.className='theme-cyber'; quotes.unshift({t:"Let the thunder write the song.", a:"— Oblivion"}); }
+    showQuote(0);
+    phrases.unshift("Mood: " + mood + " — " + new Date().toLocaleTimeString());
+    phrases = phrases.slice(0,6);
+    localStorage.setItem(PKEY, JSON.stringify(phrases));
+    renderPhrases();
+  });
+});
+
+/* ===== theme buttons ===== */
+document.getElementById('themeDark').addEventListener('click', ()=> document.body.className='theme-dark');
+document.getElementById('themeGlass').addEventListener('click', ()=> document.body.className='theme-glass');
+document.getElementById('themeCyber').addEventListener('click', ()=> document.body.className='theme-cyber');
+
+/* ===== small: save/load state (for future) ===== */
+/* you can extend this to sync with backend or GitHub Pages */
+</script>
+</body>
+</html>
