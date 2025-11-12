@@ -31,7 +31,7 @@ Perfect as a browser homepage or a second-monitor productivity space.
 Download or clone the repository:
 
 ```bash
-git clone https://github.com/nuqxo/oblivion-dashboard.git
+git clone https://github.com/nuqxo/oblivion.git
 ````
 
 1. Open `index.html` in your browser
