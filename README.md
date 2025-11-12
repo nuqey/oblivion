@@ -1,6 +1,6 @@
 ![5b55e544-e706-4679-8daf-0546996aeadb](https://github.com/user-attachments/assets/9b85cabe-a418-49ec-8a7f-10bace4e622a)
 
-# 🌑 Oblivion — Dark Minimal Productivity Dashboard
+# 🌑 Oblivion — Dark Minimal Dashboard
 
 **Oblivion** is a calm, dark, minimal personal dashboard designed for focus and ambience.  
 It brings together a clock, weather, ambient audio player, Pomodoro timer, notes, and mood-based themes — all client-side, with no login and no backend.
