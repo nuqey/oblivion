@@ -1,69 +1,103 @@
-![5b55e544-e706-4679-8daf-0546996aeadb](https://github.com/user-attachments/assets/9b85cabe-a418-49ec-8a7f-10bace4e622a)
+# 🌑 Oblivion — Dark Minimal Productivity Dashboard
 
-# 🌑 Oblivion — Dark Minimal Dashboard
+**Oblivion** is a dark, minimal productivity dashboard built for deep focus and ambient calm.
+Designed to be distraction-free, it works perfectly as a browser homepage or a second-monitor workspace.
 
-**Oblivion** is a calm, dark, minimal personal dashboard designed for focus and ambience.  
-It brings together a clock, weather, ambient audio player, Pomodoro timer, notes, and mood-based themes — all client-side, with no login and no backend.
-
-Perfect as a browser homepage or a second-monitor productivity space.
+No accounts. No tracking. No backend. Just focus.
 
 ---
 
 ## ✨ Features
-✔ Real-time clock & date  
-✔ Weather via Open-Meteo (no API key needed)  
-✔ Ambient audio player + simple visualizer  
-✔ Pomodoro focus timer  
-✔ Rotating quotes and mood themes  
-✔ Local notes stored in `localStorage`  
-✔ Fully client-side — no accounts, no tracking  
+
+* 🕒 Real-time clock & date
+* 🌤️ Weather data via **Open-Meteo** (no API key required)
+* 🎧 Ambient audio player with simple visualizer
+* 🍅 Pomodoro focus timer
+* 💬 Rotating quotes & mood-based themes
+* 📝 Notes saved locally (LocalStorage)
+* ⚡ Fully client-side — works offline
+
+---
+
+## 🎯 Why Oblivion?
+
+Oblivion was created as a calm, personal space for focus sessions.
+Inspired by minimal dashboards and ambient work environments, the goal is to remove noise and friction while keeping essential tools accessible.
+
+It’s built for people who want to **work quietly and intentionally**.
+
+---
+
+## 🧠 Technical Decisions
+
+* Fully client-side architecture for simplicity and privacy
+* LocalStorage used instead of a backend for persistence
+* Modular JavaScript for each feature (clock, weather, pomodoro, audio, notes)
+* API-first approach using Open-Meteo without authentication
+* Clean, minimal UI with smooth gradients and dark themes
 
 ---
 
 ## 📦 Tech Stack
-- **HTML / CSS / JavaScript**
-- Open-Meteo Weather API
-- LocalStorage for saved notes & phrases
-- Minimal UI & smooth gradients
+
+* **HTML / CSS / JavaScript**
+* **Open-Meteo Weather API**
+* **LocalStorage** for notes & preferences
+* Minimal UI principles & responsive layout
 
 ---
 
 ## 🔌 Setup
 
-Download or clone the repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/nuqxo/oblivion.git
-````
+```
 
-1. Open `index.html` in your browser
-2. (Optional) Load an `.mp3` file into the ambient player
-3. Enjoy your personal calm space ✨
+Open `index.html` in your browser.
+
+(Optional) Load an `.mp3` file into the ambient audio player.
+
+That’s it.
 
 ---
 
 ## 📁 File Structure
 
-```
+```text
 oblivion/
 │── index.html
-└── assets/   (optional for sounds)
+└── assets/        # optional (ambient sounds)
 ```
 
 ---
 
-## ✅ Notes
+## 🗺️ Roadmap
 
-* Notes and phrases are saved locally in your browser
-* No server required — works offline
-* You can host it on GitHub Pages or any static hosting
-
----
-
-## ✅ License
-
-This project is open-source and free to use.
+* [ ] Theme customization panel
+* [ ] Multiple note boards
+* [ ] Pomodoro session history
+* [ ] Keyboard shortcuts
+* [ ] PWA / offline-first support
 
 ---
 
-Made with silence, focus, and calm design by **Nuqxo**
+## 📌 Notes
+
+* Notes and settings are stored locally in your browser
+* No server required
+* Can be hosted on **GitHub Pages** or any static hosting
+
+---
+
+## 📜 License
+
+Open-source and free to use.
+
+---
+
+**Built by Nuqxo**
+Clean code • calm visuals • minimal interfaces
+
+só fala.
