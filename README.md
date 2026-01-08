@@ -68,7 +68,6 @@ That’s it.
 ```text
 oblivion/
 │── index.html
-└── assets/        # optional (ambient sounds)
 ```
 
 ---
