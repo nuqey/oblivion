@@ -99,5 +99,3 @@ Open-source and free to use.
 
 **Built by Nuqxo**
 Clean code • calm visuals • minimal interfaces
-
-só fala.
