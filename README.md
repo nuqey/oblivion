@@ -1,4 +1,5 @@
 # 🌑 Oblivion — Dark Minimal Productivity Dashboard
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/a9166ff7-5c6c-4755-a70d-5c16068722cc" />
 
 **Oblivion** is a dark, minimal productivity dashboard built for deep focus and ambient calm.
 Designed to be distraction-free, it works perfectly as a browser homepage or a second-monitor workspace.
