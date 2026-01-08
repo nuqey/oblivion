@@ -67,7 +67,7 @@ That’s it.
 
 ```text
 oblivion/
-│── index.html
+└── index.html
 ```
 
 ---
