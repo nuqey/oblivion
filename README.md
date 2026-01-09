@@ -68,7 +68,9 @@ That’s it.
 
 ```text
 oblivion/
-└── index.html
+├── index.html
+├── style.css
+└── script.js
 ```
 
 ---
