@@ -73,16 +73,6 @@ oblivion/
 
 ---
 
-## 🗺️ Roadmap
-
-* [ ] Theme customization panel
-* [ ] Multiple note boards
-* [ ] Pomodoro session history
-* [ ] Keyboard shortcuts
-* [ ] PWA / offline-first support
-
----
-
 ## 📌 Notes
 
 * Notes and settings are stored locally in your browser
