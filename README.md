@@ -53,7 +53,7 @@ It’s built for people who want to **work quietly and intentionally**.
 Clone the repository:
 
 ```bash
-git clone https://github.com/nuqxo/oblivion.git
+git clone https://github.com/nuqey/oblivion.git
 ```
 
 Open `index.html` in your browser.
