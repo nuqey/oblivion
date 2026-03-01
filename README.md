@@ -89,5 +89,5 @@ Open-source and free to use.
 
 ---
 
-**Built by Nuqxo**
+**Built by Nuqey**
 Clean code • calm visuals • minimal interfaces
